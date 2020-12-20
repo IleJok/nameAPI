@@ -24,14 +24,45 @@ namespace nameAPI.Controllers
 
         private async Task getNames()
         {
-            _namesList = await nameContainer.getNamesAsync();
+            if (_namesList.Count == 0)
+            {
+                _namesList = await nameContainer.getNamesAsync();
+            }
+            
         }
 
+        /* returns the names in order, where the most common name is in top of the list*/
         [HttpGet]
         public async Task<IEnumerable<Name>> GetAsync()
         {
             await getNames();
-            return _namesList.ToArray();
+            return _namesList.OrderByDescending(x => x.amount).ToArray();
+        }
+
+        /* returns the names in alphabetical order*/
+        [HttpGet("alphabetical")]
+        public async Task<IEnumerable<Name>> GetAlphabeticalAsync()
+        {
+            await getNames();
+            return _namesList.OrderBy(x => x.name).ToArray();
+        }
+
+        /* returns the sum of different names*/
+        [HttpGet("amount")]
+        public async Task<int> GetAmountAsync()
+        {
+            await getNames();
+            return _namesList.Sum(x => x.amount);
+        }
+
+        /* returns the amount for given name*/
+        [HttpGet("count/{name}")]
+        public async Task<int> GetNoAsync(string name)
+        {
+            string compare = name.Trim().ToLower();
+            await getNames();
+            var oneName = _namesList.Where(x => x.name.ToLower().Equals(compare)).FirstOrDefault();
+            return oneName.amount;
         }
     }
 }

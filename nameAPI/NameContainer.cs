@@ -54,10 +54,15 @@ namespace nameAPI
 
         public async Task<List<Name>> getNamesAsync()
         {
+            if (namesList.Count == 0)
+            {
+                await getNamesFromJsonAsync();
+                return this.namesList;
+            } else
+            {
+                return this.namesList;
+            }                    
             
-            await getNamesFromJsonAsync();
-            
-            return this.namesList;
         }
     }
 }
