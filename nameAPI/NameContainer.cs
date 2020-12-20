@@ -9,6 +9,8 @@ namespace nameAPI
 {
     public class NameContainer
     {
+        private const string filePath = "C:/Users/Ilkka/source/repos/nameAPI/nameAPI/names.json";
+
         /*Singleton class to read the names from JSON, no need to have multiple name containers*/
         private static NameContainer nameContainer;
         private List<Name> namesList = null;
@@ -19,31 +21,42 @@ namespace nameAPI
             {
                 /* If we the nameContainer is null, let's create a new object*/
                 nameContainer = new NameContainer();
+                
             }
             return nameContainer;
         }
 
         private NameContainer()
         {
-            this.namesList = new List<Name>();
+            namesList = new List<Name>();
         }
 
-        public async Task getNamesFromJsonAsync()
+        private async Task getNamesFromJsonAsync()
         {
+            Rootobject listOfNames = new Rootobject();
             try
             {
-                using FileStream openStream = File.OpenRead("names.json");
-                namesList = await JsonSerializer.DeserializeAsync<List<Name>>(openStream);
+                using FileStream openStream = File.OpenRead(filePath);
+                listOfNames = await JsonSerializer.DeserializeAsync<Rootobject>(openStream);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            
+
+            foreach (var item in listOfNames.names)
+            {
+                namesList.Add(item);
+            }
+
+
         }
 
-        public List<Name> getNames()
+        public async Task<List<Name>> getNamesAsync()
         {
+            
+            await getNamesFromJsonAsync();
+            
             return this.namesList;
         }
     }

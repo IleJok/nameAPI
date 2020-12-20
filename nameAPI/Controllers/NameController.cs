@@ -14,13 +14,12 @@ namespace nameAPI.Controllers
         NameContainer nameContainer;
 
         private readonly ILogger<NameController> _logger;
-        List<Name> _namesList;
+        List<Name> _namesList = new List<Name>();
 
         public NameController(ILogger<NameController> logger)
         {
             _logger = logger;
-             nameContainer = NameContainer.GetNameContainer();
-            
+             nameContainer = NameContainer.GetNameContainer();    
         }
 
         private async Task getNames()
@@ -29,16 +28,10 @@ namespace nameAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Name> Get()
+        public async Task<IEnumerable<Name>> GetAsync()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Name
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            await getNames();
+            return _namesList.ToArray();
         }
     }
 }
