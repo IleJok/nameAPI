@@ -11,16 +11,21 @@ namespace nameAPI.Controllers
     [Route("[controller]")]
     public class NameController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        NameContainer nameContainer;
 
         private readonly ILogger<NameController> _logger;
+        List<Name> _namesList;
 
         public NameController(ILogger<NameController> logger)
         {
             _logger = logger;
+             nameContainer = NameContainer.GetNameContainer();
+            
+        }
+
+        private async Task getNames()
+        {
+            _namesList = await nameContainer.getNamesAsync();
         }
 
         [HttpGet]
