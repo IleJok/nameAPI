@@ -19,3 +19,10 @@ C:\Users\Ilkka\source\repos\nameAPI\nameAPI\obj\Debug\netcoreapp3.1\nameAPI.dll
 C:\Users\Ilkka\source\repos\nameAPI\nameAPI\obj\Debug\netcoreapp3.1\nameAPI.pdb
 C:\Users\Ilkka\source\repos\nameAPI\nameAPI\obj\Debug\netcoreapp3.1\nameAPI.genruntimeconfig.cache
 C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\names.json
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\System.Web.Cors.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\System.Web.Http.Cors.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Ilkka\source\repos\nameAPI\nameAPI\obj\Debug\netcoreapp3.1\nameAPI.csproj.CopyComplete

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace nameAPI.Controllers
         }
 
         /* returns the names in order, where the most common name is in top of the list*/
+        [EnableCors("namefront")]
         [HttpGet]
         public async Task<IEnumerable<Name>> GetAsync()
         {
@@ -40,6 +42,7 @@ namespace nameAPI.Controllers
         }
 
         /* returns the names in alphabetical order*/
+        [EnableCors("namefront")]
         [HttpGet("alphabetical")]
         public async Task<IEnumerable<Name>> GetAlphabeticalAsync()
         {
@@ -48,6 +51,7 @@ namespace nameAPI.Controllers
         }
 
         /* returns the sum of different names*/
+        [EnableCors("namefront")]
         [HttpGet("amount")]
         public async Task<int> GetAmountAsync()
         {
@@ -56,12 +60,17 @@ namespace nameAPI.Controllers
         }
 
         /* returns the amount for given name*/
+        [EnableCors("namefront")]
         [HttpGet("count/{name}")]
         public async Task<int> GetNoAsync(string name)
         {
             string compare = name.Trim().ToLower();
             await getNames();
             var oneName = _namesList.Where(x => x.name.ToLower().Equals(compare)).FirstOrDefault();
+            if (oneName == null)
+            {
+                return 0;
+            }
             return oneName.amount;
         }
     }
