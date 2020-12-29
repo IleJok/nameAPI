@@ -14,6 +14,7 @@ namespace nameAPI.Controllers
     {
         NameContainer nameContainer;
 
+        /*Logging is not used for this app*/
         private readonly ILogger<NameController> _logger;
         List<Name> _namesList = new List<Name>();
 
